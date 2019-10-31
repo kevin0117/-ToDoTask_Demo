@@ -17,12 +17,12 @@
     </div>
     <div>
       <%= label :priority, "任務優先順序"  %>
-      <%= form.radio_button :priority, '1' %>
-      <%= label :priority, '1' %>
-      <%= form.radio_button :priority, '2' %>
-      <%= label :priority, '2' %>
-      <%= form.radio_button :priority, '3' %>
-      <%= label :priority, '3' %>
+      <%= form.radio_button :priority, 'low' %>
+      <%= label :priority, 'low' %>
+      <%= form.radio_button :priority, 'medium' %>
+      <%= label :priority, 'medium' %>
+      <%= form.radio_button :priority, 'urgent' %>
+      <%= label :priority, 'urgent' %>
     </div>
     <div>
       <%= label :status, "任務狀態" %>

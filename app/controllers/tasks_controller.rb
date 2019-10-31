@@ -19,7 +19,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to '/tasks', notice: "任務已建立"
     else
-      render :new  
+      render :new, notice: "建立失敗"  
     end
   end
 
@@ -30,7 +30,7 @@ class TasksController < ApplicationController
     if @task.update(task_params)
       redirect_to '/tasks', notice: "編輯成功"
     else
-      render :edit
+      render :edit, notice: "編輯失敗" 
     end
   end
   
@@ -38,6 +38,7 @@ class TasksController < ApplicationController
     @task.destroy
     redirect_to '/tasks', notice: "刪除成功"
   end
+
   private
   def task_params
     params.require(:task).permit(:title, :content, :task_begin, :task_end, :priority, :status)
