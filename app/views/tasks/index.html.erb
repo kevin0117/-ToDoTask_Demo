@@ -1,4 +1,4 @@
-<%= flash[:notice] %>
+
 
 <h1>工作任務首頁</h1>
 
@@ -18,13 +18,17 @@
 
 <% @tasks.each do |task| %>
   <tr>
-      <td><%= task.id %></td>
-      <td><%= task.title %></td>
-      <td><%= task.content %></td>
-      <td><%= task.priority %></td>
-      <td><%= task.status %></td>
-      <td><%= task.task_begin %></td>
-      <td><%= task.task_end %></td>
+    <td><%= task.id %></td>
+    <td><%= link_to task.title, task_path(task)  %></td>
+    <td><%= task.content %></td>
+    <td><%= task.priority %></td>
+    <td><%= task.status %></td>
+    <td><%= task.task_begin %></td>
+    <td><%= task.task_end %></td>
+    <td>
+      <%= link_to "編輯", edit_task_path(task) %>
+      <%= link_to "刪除", task_path(task), method: 'delete', data: { confirm: "確認刪除嗎？"} %>
+    </td>
   </tr>
 <% end %>
 </table>
