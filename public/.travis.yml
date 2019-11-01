@@ -14,9 +14,10 @@ services:
 
 script:
 
-  - bin/rake db:migrate RAILS_ENV=test
-
-  - bin/rake
+ — bundle install — jobs=3 — retry=3
+ — bundle exec rake db:create
+ — bundle exec rake db:migrate
+ — bundle exec rspec
 
 cache: bundler
 
