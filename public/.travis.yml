@@ -12,3 +12,10 @@ script:
   - bin/rake
 
 cache: bundler
+
+services:
+  - postgresql
+
+  - psql -c 'create database travis_ci_test;' -U postgres
+
+  - cp config/database.yml.travis config/database.yml
