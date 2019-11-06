@@ -3,8 +3,8 @@ addons:
   postgresql: "11.5"
   apt:
     packages:
-    - postgresql-10
-    - postgresql-client-10
+    # - postgresql-10
+    # - postgresql-client-10
     # - google-chrome-stable
     # - chromium-chromedriver
   env:
@@ -15,11 +15,18 @@ language: ruby
 rvm:
   - 2.6.3
 before_install:
+  - sudo apt-get update
+  - sudo apt-get --yes remove postgresql\*
+  - sudo apt-get install -y postgresql-11 postgresql-client-11
+  - sudo cp /etc/postgresql/{9.6,11}/main/pg_hba.conf
+  - sudo service postgresql restart 11  
   - gem install rake
 services:
   - postgresql
   - xvfb
 before_script:
+  - psql 11.5
+  - cp config/database.yml.travis config/database.yml
   - ln -s /usr/lib/chromium-browser/chromedriver ~/bin/chromedriver
   - export DISPLAY=:99.0 && sleep 3
 install:
