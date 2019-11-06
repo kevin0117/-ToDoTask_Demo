@@ -26,8 +26,8 @@ services:
   - xvfb
 before_script:
   - psql 11.5
-  - psql -c 'CREATE DATABASE {test};' -U postgres
-  - psql -c 'CREATE ROLE travis;' -U postgres
+  - psql -c 'CREATE DATABASE test;' -U postgres
+  - psql -c 'CREATE ROLE travis SUPERUSER LOGIN CREATEDB;' -U postgres
   - cp config/database.yml.travis config/database.yml
   - ln -s /usr/lib/chromium-browser/chromedriver ~/bin/chromedriver
   - export DISPLAY=:99.0 && sleep 3
