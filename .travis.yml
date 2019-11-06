@@ -7,6 +7,9 @@ addons:
     - postgresql-client-10
     # - google-chrome-stable
     # - chromium-chromedriver
+  env:
+  global:
+    - PGPORT=5433
   chrome: stable
 language: ruby
 rvm:
