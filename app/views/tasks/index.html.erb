@@ -25,10 +25,8 @@
     <td><%= task.status %></td>
     <td><%= task.task_begin %></td>
     <td><%= task.task_end %></td>
-    <td>
-      <%= link_to "編輯", edit_task_path(task) %>
-      <%= link_to "刪除", task_path(task), method: 'delete', data: { confirm: "確認刪除嗎？"} %>
-    </td>
+    <td><%= button_to "編輯", edit_task_path(task), method: 'get' %></td>
+    <td><%= button_to "刪除", task_path(task), method: 'delete', data: { confirm: "確認刪除嗎？"} %></td>
   </tr>
 <% end %>
 </table>
