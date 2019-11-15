@@ -20,9 +20,11 @@ RSpec.describe Task, type: :model do
     it { should validate_presence_of(:priority) }
     it { should validate_presence_of(:status) }
   end
+
+
 end
   # describe "Task Information" do
-  #   it "Input fields are filled in" do
+  #   it "is valid with a title, content, task date, priority, and status" do
   #     task = Task.new(title: "Shopping", 
   #                     content: "buy apple", 
   #                     task_begin: "2019-11-01 09:00:00",
@@ -42,6 +44,12 @@ end
   #       expect {
   #         expect(task).to be_valid
   #       }.to raise_exception(/Title can't be blank/)
+  #   end
+
+  #   it "is invalid without a title" do
+  #     task = Task.new(title: nil)
+  #     task.valid?
+  #     expect(task.errors[:title]).to include("can't be blank")
   #   end
     
   #   it "content field is blank" do
