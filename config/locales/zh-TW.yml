@@ -1,0 +1,23 @@
+zh-TW:
+  shared:
+    frontend:
+      navbar:
+        language: "語言"
+  tasks:
+    task_id: "任務ID"
+    task_title: "名稱"
+    task_content: "內容"
+    task_priority: "優先順序"
+    priority_low: "不急"
+    priority_medium: "還好"
+    priority_urgent: "超急"
+    task_status: "狀態"
+    status_pendng: "未進行"
+    status_proceeding: "進行中"
+    status_done:  "已完成"
+    task_begin: "任務開始"
+    task_end: "任務結束"
+    edit: "編輯"
+    delete: "刪除"
+    create: "新增任務"
+

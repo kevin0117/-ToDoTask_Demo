@@ -17,4 +17,5 @@ class Task < ApplicationRecord
   validates :priority, presence: true
   validates :status, presence: true
   enum priority: { low: 1, medium: 2, urgent:3 }
+  enum status: { pending: 1, proceeding: 2, done:3 }
 end
