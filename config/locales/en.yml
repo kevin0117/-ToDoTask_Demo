@@ -57,6 +57,7 @@ en:
     index_title: "Task List"
     edit_title: "Edit Task"
     new_title: "Create Task"
+    show_title: "Task Content"
     edit: "Edit"
     delete: "Delete"
     create: "Create Task"

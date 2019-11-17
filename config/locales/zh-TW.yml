@@ -26,6 +26,7 @@ zh-TW:
     index_title: "任務列表"
     edit_title: "編輯任務"
     new_title: "新增任務"
+    show_title: "任務內容"
     edit: "編輯"
     delete: "刪除"
     create: "新增任務"
