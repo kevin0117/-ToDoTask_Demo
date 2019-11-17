@@ -3,6 +3,12 @@ zh-TW:
     frontend:
       navbar:
         language: "語言"
+        user_info: "個人資料"
+        my_task: "我的任務"
+        new_task: "新增任務"
+        settings: "設定"
+        logout: "登出"
+        search: "搜尋"
   tasks:
     task_id: "任務ID"
     task_title: "名稱"
@@ -12,11 +18,14 @@ zh-TW:
     priority_medium: "還好"
     priority_urgent: "超急"
     task_status: "狀態"
-    status_pendng: "未進行"
+    status_pending: "未進行"
     status_proceeding: "進行中"
     status_done:  "已完成"
     task_begin: "任務開始"
     task_end: "任務結束"
+    index_title: "任務列表"
+    edit_title: "編輯任務"
+    new_title: "新增任務"
     edit: "編輯"
     delete: "刪除"
     create: "新增任務"

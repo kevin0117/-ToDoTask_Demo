@@ -34,6 +34,12 @@ en:
     frontend:
       navbar:
         language:  "Language"
+        user_info: "Profile"
+        my_task: "My Task"
+        new_task: "New Task"
+        settings: "Settings"
+        logout: "Log Out"
+        search: "Search"
   tasks:
     task_id: "ID"
     task_title:  "Title"
@@ -43,11 +49,14 @@ en:
     priority_medium: "medium"
     priority_urgent: "urgent"
     task_status: "Status"
-    status_pendng: "Pending"
+    status_pending: "Pending"
     status_proceeding: "Proceeding"
     status_done:  "Done"
     task_begin: "Begin"
     task_end: "End"
+    index_title: "Task List"
+    edit_title: "Edit Task"
+    new_title: "Create Task"
     edit: "Edit"
     delete: "Delete"
     create: "Create Task"
