@@ -30,4 +30,34 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  shared:
+    frontend:
+      navbar:
+        language:  "Language"
+        user_info: "Profile"
+        my_task: "My Task"
+        new_task: "New Task"
+        settings: "Settings"
+        logout: "Log Out"
+        search: "Search"
+  tasks:
+    task_id: "ID"
+    task_title:  "Title"
+    task_content:  "Content"
+    task_priority:  "Priority"
+    priority_low: "low"
+    priority_medium: "medium"
+    priority_urgent: "urgent"
+    task_status: "Status"
+    status_pending: "Pending"
+    status_proceeding: "Proceeding"
+    status_done:  "Done"
+    task_begin: "Begin"
+    task_end: "End"
+    index_title: "Task List"
+    edit_title: "Edit Task"
+    new_title: "Create Task"
+    show_title: "Task Content"
+    edit: "Edit"
+    delete: "Delete"
+    create: "Create Task"

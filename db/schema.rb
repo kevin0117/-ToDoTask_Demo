@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2019_08_31_173404) do
     t.datetime "task_begin"
     t.datetime "task_end"
     t.integer "priority"
-    t.string "status"
+    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
