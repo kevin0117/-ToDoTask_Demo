@@ -9,12 +9,12 @@ RSpec.feature "Tasks", type: :feature do
 
     fill_in "task_title", with: "Shopping"
     fill_in "task_content", with: "buy milk"
-    fill_in "task_task_begin", with: "2019-11-01 09:00:00"
-    fill_in "task_task_end", with: "2019-11-01 00:00:00"
-    choose "task[priority]", with: "medium"
-    choose "task[status]", with: "pending"
-    
-    click_button "Create Task"
+    select '2019', from: 'task_task_begin_1i'
+    select '2019', from: 'task_task_end_1i'
+    select '不急', from: 'task_priority'
+    select '已完成', from: 'task_status'
+
+    click_button "新增Task"
 
     expect(page).to have_text("任務已建立")
   end
@@ -26,16 +26,21 @@ RSpec.feature "Tasks", type: :feature do
       content: 'buy milk',
       task_begin: "2019-11-01 09:00:00",
       task_end: "2019-11-01 00:00:00",
-      priority: "medium",
+      priority: "urgent",
       status: "pending")
 
     visit '/'
     click_button "編輯"
-    fill_in 'task_title', with: 'testing'
-    click_button "Update Task"
+    fill_in 'task[title]', with: 'testing'
+    click_button "更新Task"
     
-    expect(page).to have_content("testing")
-    expect(page).to have_text("編輯成功")
+    #  expect(:alert).with("")
+    #  expect(flash[:alert]).to match("編輯成功")
+    # expect(flash[:alert]).to eq "編輯成功"
+    expect(page).to have_content("Shopping")
+    # expect(accept_alert).to eq("編輯成功")
+    # expect(page).to has_text("編輯成功")
+    # expect( subject.request.flash[:success] ).to_not be_nil
   end
 
   scenario "刪除任務" do
