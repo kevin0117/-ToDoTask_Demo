@@ -14,7 +14,7 @@ RSpec.feature "Tasks", type: :feature do
     select '不急', from: 'task_priority'
     select '已完成', from: 'task_status'
 
-    click_button "新增Task"
+    click_button "送出"
 
     expect(page).to have_text("任務已建立")
   end
@@ -22,24 +22,31 @@ RSpec.feature "Tasks", type: :feature do
   scenario "編輯任務" do
     # visit '/' 把 root_path 放這裡 before @task is created, 
     # 會爆錯誤訊息 => Failure/Error: click_link "編輯" Capybara::ElementNotFound: Unable to find link "編輯"
-    @task = Task.create(title: "Shopping",
+    @task = Task.create(
+      title: "Shopping",
       content: 'buy milk',
       task_begin: "2019-11-01 09:00:00",
-      task_end: "2019-11-01 00:00:00",
+      task_end: "2019-12-01 00:00:00",
       priority: "urgent",
       status: "pending")
 
     visit '/'
     click_button "編輯"
-    fill_in 'task[title]', with: 'testing'
-    click_button "更新Task"
+    fill_in 'task_title', with: 'testing'
+
+    click_button "送出"
     
+    # expect(page).to have_content("Shopping")
+    expect(current_path).to eq(root_path)
+    # expect(page).to have_text("編輯成功")
+    
+
     #  expect(:alert).with("")
     #  expect(flash[:alert]).to match("編輯成功")
     # expect(flash[:alert]).to eq "編輯成功"
-    expect(page).to have_content("Shopping")
+    # expect(page).to have_content("Shopping")
     # expect(accept_alert).to eq("編輯成功")
-    # expect(page).to has_text("編輯成功")
+    # expect(page).to have_text("編輯成功")
     # expect( subject.request.flash[:success] ).to_not be_nil
   end
 

@@ -32,6 +32,7 @@ class TasksController < ApplicationController
     else
       render :edit, notice: "編輯失敗" 
     end
+    # debugger
   end
   
   def destroy

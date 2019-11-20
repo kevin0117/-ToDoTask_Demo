@@ -8,7 +8,7 @@
     <%= form.input :priority, as: :select, collection:[['low', t('tasks.priority_low')], ['medium', t('tasks.priority_medium')], ['urgent', t('tasks.priority_urgent')]], label_method: :second, value_method: :first, label: t("tasks.task_priority") %>
     <%= form.input :status, as: :select, collection:[['pending', t('tasks.status_pending')], ['proceeding', t('tasks.status_proceeding')], ['done', t('tasks.status_done')]], label_method: :second, value_method: :first, label: t("tasks.task_status") %>
 
-    <%= form.submit %>
+    <%= form.submit t("tasks.submit") %>
     </div>
   </div>
 
