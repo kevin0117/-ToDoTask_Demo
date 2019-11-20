@@ -1,12 +1,13 @@
 <h1>任務內容</h1>
-
-
-<h1><%= @task.title %></h1>
-
-<ul>
-  <li>任務內容：<%= @task.content %>票</li>
-  <li>任務開始：<%= @task.task_begin %></li>
-  <li>任務結束：<%= @task.task_end %></li>
-  <li>優先順序：<%= @task.priority %></li>
-  <li>任務狀態：<%= @task.status %></li>
-</ul>
+<% if @task %>
+  <h1><%= @task.title %></h1>
+  <ul>
+    <li>任務內容：<%= @task.content %>票</li>
+    <li>任務開始：<%= @task.task_begin %></li>
+    <li>任務結束：<%= @task.task_end %></li>
+    <li>優先順序：<%= @task.priority %></li>
+    <li>任務狀態：<%= @task.status %></li>
+  </ul>
+<% else %>
+  <h1>沒有此任務</h1>
+<% end %>

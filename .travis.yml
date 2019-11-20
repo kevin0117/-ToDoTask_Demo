@@ -1,0 +1,40 @@
+# This script:
+# https://travis-ci.community/t/postgresql-11-2-cannot-connect/2680/5
+# 1. Shuts down all 9.* postgreSQL databases
+# 2. installs 11.2 (at the time of this writing)
+# 3. copies the authentication information from the old 9.6 configuration
+# 4. creates a role called “travis”
+
+language: ruby
+rvm: 2.6.3
+before_install:
+  - sudo apt-get update
+  - sudo apt-get --yes remove postgresql\*
+  - sudo apt-get install -y postgresql-11 postgresql-client-11
+  - sudo cp /etc/postgresql/{9.6,11}/main/pg_hba.conf
+  - sudo service postgresql restart 11  
+before_script:
+  - psql --version
+  - psql -c 'CREATE DATABASE travis_ci_test;' -U postgres
+  - psql -c 'CREATE ROLE travis SUPERUSER LOGIN CREATEDB;' -U postgres
+  - cp config/database.yml.travis config/database.yml
+script: bundle exec rake spec
+services:
+  - postgresql
+addons:
+  postgresql: "11.5"
+
+# KaiChi Version
+# language: ruby
+# rvm:
+# - 2.6.3
+# services:
+#   - postgresql
+# env:
+#   - DB=pgsql
+# before_script:
+#   - psql -c 'create database travis_ci_test;' -U postgres
+# script:
+#   - bundle exec rake db:setup
+#   - RAILS_ENV=test bundle exec rake db:migrate
+#   - bundle exec rake spec
