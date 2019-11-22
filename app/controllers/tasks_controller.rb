@@ -13,7 +13,6 @@ class TasksController < ApplicationController
   end
 
   def create
-    # debugger
     @task = Task.new(task_params)
 
     if @task.save
@@ -32,7 +31,6 @@ class TasksController < ApplicationController
     else
       render :edit, notice: "編輯失敗" 
     end
-    # debugger
   end
   
   def destroy
