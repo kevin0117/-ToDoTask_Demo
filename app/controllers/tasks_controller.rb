@@ -13,7 +13,6 @@ class TasksController < ApplicationController
   end
 
   def create
-    # debugger
     @task = Task.new(task_params)
 
     if @task.save
