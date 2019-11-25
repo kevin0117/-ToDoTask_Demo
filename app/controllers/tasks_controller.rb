@@ -14,11 +14,14 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-
+    
+    # debugger
     if @task.save
       redirect_to '/tasks', notice: "任務已建立"
     else
-      render :new, notice: "建立失敗"  
+      @error_message = @task.errors.full_messages
+      render :new, notice: "建立失敗" 
+      # debugger
     end
   end
 
@@ -29,8 +32,10 @@ class TasksController < ApplicationController
     if @task.update(task_params)
       redirect_to '/tasks', notice: "編輯成功"
     else
+      @error_message = @task.errors.full_messages
       render :edit, notice: "編輯失敗" 
     end
+    # debugger
   end
   
   def destroy
