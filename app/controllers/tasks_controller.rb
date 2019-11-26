@@ -14,11 +14,19 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-
+    
+    # debugger
     if @task.save
       redirect_to '/tasks', notice: "任務已建立"
     else
+      @error_message = @task.errors.full_messages
+      flash[:notice] = "建立失敗"
       render :new, notice: "建立失敗"  
+      #這裡的 render :new, notice: "建立失敗"
+      #其實是類似 render partial 的概念， 把 notice:"建立失敗" 當參數帶進去
+      #所以後面的 notice:"建立失敗 是沒有作用的
+      # <%= render 'form', task: @task %>
+      # debugger
     end
   end
 
@@ -29,8 +37,11 @@ class TasksController < ApplicationController
     if @task.update(task_params)
       redirect_to '/tasks', notice: "編輯成功"
     else
-      render :edit, notice: "編輯失敗" 
+      @error_message = @task.errors.full_messages
+      flash[:notice] = "編輯失敗"
+      render :edit 
     end
+    # debugger
   end
   
   def destroy
