@@ -19,16 +19,26 @@ RSpec.feature "Tasks", type: :feature do
           status: "pending")
     end
 
-    scenario "任務列表以建立時間排序" do
+    # scenario "任務列表以建立時間排序" do
+    #   visit '/'
+    #   within 'tr:nth-child(2)' do
+    #     expect(page).to have_content("task_2") 
+    #   end
+    #   within 'tr:nth-child(3)' do
+    #     expect(page).to have_content("task_1") 
+    #   end
+    # end
+
+    scenario "任務列表以結束時間排序" do
       visit '/'
       within 'tr:nth-child(2)' do
-        expect(page).to have_content("task_2") 
-      end
-      within 'tr:nth-child(3)' do
         expect(page).to have_content("task_1") 
       end
+      within 'tr:nth-child(3)' do
+        expect(page).to have_content("task_2") 
+      end
     end
-
+    
     scenario "新增任務" do
         visit '/'
     
@@ -98,7 +108,7 @@ RSpec.feature "Tasks", type: :feature do
 
     scenario "刪除任務" do
         visit '/'
-        within 'tr:nth-child(2)' do
+        within 'tr:nth-child(3)' do
           click_button "刪除"
         end
         expect(page).not_to have_content("task_2")
