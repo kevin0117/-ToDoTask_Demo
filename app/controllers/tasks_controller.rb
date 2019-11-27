@@ -20,7 +20,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to '/tasks', notice: "任務已建立"
     else
-      @error_message = @task.errors.full_messages
+      @error_message = @task.errors.full_messages.to_sentence
       flash[:notice] = "建立失敗"
       render :new, notice: "建立失敗"  
       #這裡的 render :new, notice: "建立失敗"
@@ -38,7 +38,7 @@ class TasksController < ApplicationController
     if @task.update(task_params)
       redirect_to '/tasks', notice: "編輯成功"
     else
-      @error_message = @task.errors.full_messages
+      @error_message = @task.errors.full_messages.to_sentence
       flash[:notice] = "編輯失敗"
       render :edit 
     end
