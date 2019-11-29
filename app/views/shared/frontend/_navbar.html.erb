@@ -10,10 +10,22 @@
         <%= link_to t('tasks.index_title'), root_path , class: 'nav-link' %>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-10">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-light my-2 my-sm-0" type="submit"><%= t('.search') %></button>
-    </form>
+      <form class="form-inline my-2 my-lg-10">
+        <% if @q %>
+          <%= search_form_for @q do |f| %>
+            <%= f.search_field :title_or_content_cont, class:"form-control mr-sm-2", type:"search", placeholder:"搜尋標題或內容"%>
+            <%= f.submit class:"btn btn-outline-light my-2 my-sm-0" %>
+          <% end %>
+        <% end %>
+     </form>
+
+    <%# <form class="form-inline my-2 my-lg-10"> %>
+      <%# <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> %>
+      <%# <button class="btn btn-outline-light my-2 my-sm-0" type="submit"> %>
+        <%#= t('.search') %>
+      <%# </button> %>
+    <%# </form> %>
+    
     <ul class="navbar-nav">
 
         <li class="nav-item dropdown">
