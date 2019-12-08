@@ -4,6 +4,7 @@ class TasksController < ApplicationController
   def index
     @q = Task.ransack(params[:q])
     @tasks = @q.result(distinct: true)
+    @result_count = @tasks.count
   end
 
   def show
