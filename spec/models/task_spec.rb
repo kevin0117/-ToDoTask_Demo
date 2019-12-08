@@ -13,13 +13,7 @@ require 'rails_helper'
 
 RSpec.describe Task, type: :model do
   describe '單元測試' do   
-    subject { Task.create(
-      title: "Shopping",
-      content: 'buy milk',
-      task_begin: "Wed, 25 Nov 2019 19:06:00 CST +08:00",
-      task_end: "Wed, 21 Nov 2019 19:06:00 CST +08:00",
-      priority: "urgent",
-      status: "proceeding") }
+    subject { build(:task) }
  
     it { should validate_presence_of(:title) }
     it { should validate_presence_of(:content) }
@@ -46,10 +40,14 @@ RSpec.describe Task, type: :model do
                       task_end: "Wed, 29 Nov 2019 19:06:00 CST +08:00",
                       priority: "urgent",
                       status: "pending")
+      # task = create(:task)
       expect(task).to be_valid
     end
 
     it "任務建立失敗當結束時間設定錯誤" do
+      # task = create(:task, 
+      #               task_begin: "Wed, 25 Nov 2019 19:06:00 CST +08:00",
+      #                 task_end: "Wed, 21 Nov 2019 19:06:00 CST +08:00" )
       task = Task.new(title: "Shopping", 
                       content: "buy apple", 
                       task_begin: "Wed, 25 Nov 2019 19:06:00 CST +08:00",
@@ -60,6 +58,25 @@ RSpec.describe Task, type: :model do
           expect(task).to be_valid
         }.to raise_exception(/Task 任務結束日期不能比開始日期早/)
     end
+
+    before do
+      task_1 =create(:task, title: "task_1")
+      task_2 =create(:task, title: "task_2")
+      task_3 =create(:task, title: "task_3")
+    end 
+
+    # it "任務建立失敗當結束時間設定錯誤" do
+
+    #   # task = Task.new(title: "Shopping", 
+    #   #                 content: "buy apple", 
+    #   #                 task_begin: "Wed, 25 Nov 2019 19:06:00 CST +08:00",
+    #   #                 task_end: "Wed, 21 Nov 2019 19:06:00 CST +08:00",
+    #   #                 priority: "urgent",
+    #   #                 status: "pending")
+    #     expect {
+    #       expect(task).to be_valid
+    #     }.to raise_exception(/Task 任務結束日期不能比開始日期早/)
+    # end
   end
 
 

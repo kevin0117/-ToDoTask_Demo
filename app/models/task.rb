@@ -10,6 +10,7 @@
 # end
 
 class Task < ApplicationRecord
+  include AASM
   validates :title, presence: true
   validates :content, length: {maximum: 500}, presence: true
   validates :task_begin, presence: true  #基本驗證，步驟12要改為 task_begin < task_end
@@ -19,6 +20,19 @@ class Task < ApplicationRecord
   validate :date_validator
   enum priority: { low: 1, medium: 2, urgent:3 }
   enum status: { pending: 1, proceeding: 2, done:3 }
+
+  aasm column: 'status', enum: true do
+    state :pending, initial: true
+    state :proceeding, :done
+
+    event :proceed do
+      transitions from: :pending, to: :proceeding
+    end
+
+    event :finish do
+      transitions from: :proceeding, to: :done
+    end
+  end
 
   def date_validator
     if (self.task_begin == nil) || (self.task_end == nil)
