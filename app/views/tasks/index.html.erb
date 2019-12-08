@@ -1,6 +1,10 @@
 <h1><%=t("tasks.index_title")%></h1>
-<%#= params[:q] %>
-<h3>搜尋結果共: <%= @result_count %> 筆 </h3>
+
+<%= paginate @tasks, theme: 'twitter-bootstrap-4' %>
+
+<% if params[:q] %>
+  <h3>搜尋結果共: <%= @result_count %> 筆 </h3>
+<% end %>
 <table class="table table-hover">
   <tr>
     <td><%= sort_link(@q, :id, t("tasks.task_id"), id: "title", default_order: :desc) %></td>
