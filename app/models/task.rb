@@ -10,8 +10,10 @@
 # end
 
 class Task < ApplicationRecord
+  belongs_to :user
   include AASM
   paginates_per 5
+  validates :user_id, presence: true
   validates :title, presence: true
   validates :content, length: {maximum: 500}, presence: true
   validates :task_begin, presence: true  #基本驗證，步驟12要改為 task_begin < task_end
