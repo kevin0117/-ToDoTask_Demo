@@ -7,42 +7,48 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <%= link_to t('tasks.index_title'), root_path , class: 'nav-link' %>
+        <%= link_to t('tasks.index_task'), tasks_path , class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to t('tasks.index_user'), users_path , class: 'nav-link' %>
       </li>
     </ul>
+
+    <%= form_tag(tasks_path, :method => "get", :class => 'd-flex') do %>
       <form class="form-inline my-2 my-lg-10">
-        <% if @q %>
-          <%= search_form_for @q do |f| %>
+        <% if ransack_obj %>
+          <%= search_form_for ransack_obj do |f| %>
             <%= f.search_field :title_or_content_cont, class:"form-control mr-sm-2", type:"search", placeholder:"搜尋標題或內容"%>
             <%= f.submit class:"btn btn-outline-light my-2 my-sm-0" %>
           <% end %>
         <% end %>
-     </form>
-
-    <%# <form class="form-inline my-2 my-lg-10"> %>
-      <%# <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> %>
-      <%# <button class="btn btn-outline-light my-2 my-sm-0" type="submit"> %>
-        <%#= t('.search') %>
-      <%# </button> %>
-    <%# </form> %>
-    
+      </form>
+    <% end %>
+         
     <ul class="navbar-nav">
-
+        <% if logged_in? %>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= t('.user_info') %>
+            <%= current_user.username.upcase %>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <%= link_to t('.my_task'), root_path , class: 'dropdown-item' %>
+            <%= link_to t('.my_task'), user_tasks_path(current_user) , class: 'dropdown-item' %>
             <div class="dropdown-divider"></div>          
             <%= link_to t('.new_task'), new_task_path , class: 'dropdown-item' %>
             <div class="dropdown-divider"></div>
-            <%= link_to t('.settings'), '#' , class: 'dropdown-item' %>
+            <%= link_to t('.settings'), edit_user_path(current_user) , class: 'dropdown-item' %>
             <div class="dropdown-divider"></div>
-            <%= link_to t('.logout'), '#' , class: 'dropdown-item'%>
+            <%= link_to t('.logout'), logout_path, method:'delete' , class: 'dropdown-item'%>
           </div>
         </li> 
-
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "登入", login_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "註冊", sign_up_path, class: 'nav-link' %>
+          </li>
+        <% end %>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <%= t('.language') %>
@@ -52,7 +58,19 @@
             <div class="dropdown-divider"></div> 
             <%= link_to('English', :locale => 'en', class: 'dropdown-item') %>
           </div>
-        </li>
+        </li>       
+        
     </ul>
   </div>
 </nav>
+
+
+
+    <%# <form class="form-inline my-2 my-lg-10"> %>
+      <%# <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> %>
+      <%# <button class="btn btn-outline-light my-2 my-sm-0" type="submit"> %>
+        <%#= t('.search') %>
+      <%# </button> %>
+    <%# </form> %>
+
+
