@@ -54,7 +54,9 @@ en:
     status_done:  "Done"
     task_begin: "Begin"
     task_end: "End"
-    index_title: "Task List"
+    task_owner: "Owner"
+    index_task: "Task List"
+    index_user: "User List"
     edit_title: "Edit Task"
     new_title: "Create Task"
     show_title: "Task Title"
@@ -64,3 +66,9 @@ en:
     delete: "Delete"
     create: "Create Task"
     submit: "Submit"
+    user:
+      my_task: "My Task"
+  users:
+    index_user: "User List"
+    edit: "Edit"
+    delete: "Delete"

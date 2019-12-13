@@ -23,7 +23,9 @@ zh-TW:
     status_done:  "已完成"
     task_begin: "任務開始"
     task_end: "任務結束"
-    index_title: "任務列表"
+    task_owner: "負責人"
+    index_task: "任務列表"
+    index_user: "使用者列表"
     edit_title: "編輯任務"
     new_title: "新增任務"
     show_title: "任務標題"
@@ -33,4 +35,10 @@ zh-TW:
     delete: "刪除"
     create: "新增任務"
     submit: "送出"
+    user:
+      my_task: "我的任務"
+  users:
+    index_user: "使用者列表"
+    edit: "編輯"
+    delete: "刪除"
 
