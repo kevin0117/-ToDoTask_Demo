@@ -1,10 +1,13 @@
 class TasksController < ApplicationController
   before_action :find_task, only: [:show, :edit, :update, :destroy]
+  before_action :login_check
+  before_action :same_user_check, only: [:edit,:update, :destroy]
 
   def index
-    @q = Task.ransack(params[:q])
+    @q = Task.includes(:user).ransack(params[:q])
     @tasks = @q.result(distinct: true).page params[:page]
-    @result_count = @tasks.count
+    # @tasks = current_user.tasks
+    # @result_count = @tasks.count
   end
 
   def show
@@ -16,7 +19,7 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-    
+    @task.user_id = current_user.id
     # debugger
     if @task.save
       redirect_to '/tasks', notice: "任務已建立"
@@ -32,7 +35,7 @@ class TasksController < ApplicationController
     end
   end
 
-  def edit    
+  def edit  
   end
   
   def update
@@ -51,12 +54,19 @@ class TasksController < ApplicationController
     redirect_to '/tasks', notice: "刪除成功"
   end
 
+  def user
+    @q = current_user.tasks.ransack(params[:q])
+    @tasks = @q.result(distinct: true).page params[:page]
+  end
+
   private
   def task_params
-    params.require(:task).permit(:title, :content, :task_begin, :task_end, :priority, :status)
+    params.require(:task).permit(:title, :content, :task_begin, :task_end, :priority, :status, :user)
   end
   
   def find_task
     @task = Task.find_by(id: params[:id])
   end
+
+  
 end

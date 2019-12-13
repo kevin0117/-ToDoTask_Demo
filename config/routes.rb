@@ -1,8 +1,21 @@
 Rails.application.routes.draw do
-  resources :tasks
+  resources :tasks do
+    collection  do
+      get :user
+    end
+  end
+  #SESSION
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
   
+  #USER
   get 'sign_up', to: 'users#new'
-  # post 'users', to: 'users#create'
   resources :users, except: [:new]
-  root 'tasks#index'
+
+  #TASK
+  # root 'tasks#index'
+
+  #PAGE
+  root 'pages#index'
 end
