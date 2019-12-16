@@ -18,4 +18,14 @@ Rails.application.routes.draw do
 
   #PAGE
   root 'pages#index'
+
+  #ADMIN
+  namespace :admin, path: 'mhw' do
+    resources :users
+    get 'login', to: 'sessions#new'
+    post 'login', to: 'sessions#create'
+    delete 'logout', to: 'sessions#destroy'
+    # resources :tasks
+  end
+
 end
