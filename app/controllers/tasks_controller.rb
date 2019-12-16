@@ -40,7 +40,7 @@ class TasksController < ApplicationController
   
   def update
     if @task.update(task_params)
-      redirect_to '/tasks', notice: "編輯成功"
+      redirect_to user_tasks_path(current_user), notice: "編輯成功"
     else
       @error_message = @task.errors.full_messages.to_sentence
       flash[:notice] = "編輯失敗"
