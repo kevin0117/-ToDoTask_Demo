@@ -1,0 +1,28 @@
+<h1><%= t('users.index_user') %></h1>
+
+<%#= paginate @users, theme: 'twitter-bootstrap-4' %>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <td>使用者帳號</td>
+      <td>Ｅ-Mail信箱</td>
+      <td>任務數量</td>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+      <td><%= user.username %></td>
+      <td><%= user.email %></td>
+      <td><%= user.tasks.count %></td>
+      <td><%= button_to t("users.edit"), edit_user_path(user),class:"btn btn-outline-secondary", method: 'get' %></td>
+      <td><%= button_to t("users.delete"), user_path(user), class:"btn btn-outline-danger", method: 'delete', data: { confirm: "確認刪除嗎？"} %></td>
+    </tr>
+    <% end %>
+
+  </tbody>
+</table>
+
+<%= button_to t("users.create"), sign_up_path ,class:"btn btn-outline-dark", method: "get"%>
