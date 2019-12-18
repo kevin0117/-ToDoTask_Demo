@@ -1,8 +1,6 @@
 <h1><%=t("tasks.index_task")%></h1>
 
 <%= paginate @tasks, theme: 'twitter-bootstrap-4' %>
-<%#= paginate current_user.tasks, theme: 'twitter-bootstrap-4' %>
-
 
 <% if params[:q] %>
   <h3>搜尋結果共: <%= @tasks.count %> 筆 </h3>
@@ -25,7 +23,7 @@
         <% end %>
       <% end %>
     </td>
-    <td>操作</td>
+    <td><%= t('attributes.users.action') %></td>
   </tr>
     <% @tasks.each do |task| %>
     <tr>
@@ -37,7 +35,7 @@
       <td><%= task.task_end.to_s(:short) %></td>
       <td><%= t("tasks.status_#{task.status}") %></td>
       <td>
-      <% if logged_in? && current_user == task.user %>
+      <% if logged_in? %>
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <%#= current_user.username.upcase %>
         </a>

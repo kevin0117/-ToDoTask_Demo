@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     I18n.available_locales.map(&:to_s).include?(parsed_locale) ? parsed_locale : nil
   end
 
-  helper_method :current_user, :logged_in?, :ransack_obj, :ransack_tasks
+  helper_method :current_user, :logged_in?, :ransack_obj, :ransack_tasks, :user_role
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -37,9 +37,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def user_role(x)
+    x ? t('attributes.users.admin') : t('attributes.users.member')
+  end
+
   def same_user_check
-    if !(current_user.id == @task.user_id)
-      redirect_to users_path, notice: "你只能編輯或刪除自己的任務"
+    if !(current_user.id == @user.id) && !@current_user.admin
+      redirect_to tasks_path, notice: "你只能編輯或刪除自己的帳戶"
+    end
+  end
+
+  def same_task_check
+    if !(current_user.id == @task.user_id) && !@current_user.admin
+      redirect_to user_tasks_path(current_user), notice: "你只能編輯或刪除自己的任務"
     end
   end
 
