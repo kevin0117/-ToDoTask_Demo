@@ -73,3 +73,24 @@ en:
     edit: "Edit"
     delete: "Delete"
     create: "Add User"
+
+  attributes:
+    users:
+      admin: "Admin"
+      member: "Member"
+      role: "Role"
+      username: "Username"
+      email: "E-Mail"
+      action: "Action"
+      username: "Username"
+      email: "E-Mail"
+      password: "Password"
+      register_admin: "Register to be administrator"
+      account_info: "User Account"
+    
+    tasks:
+      task_count: "Task count"
+      backend: "Back-End"
+
+  # admin: "Admin"
+  # member: "Member"
