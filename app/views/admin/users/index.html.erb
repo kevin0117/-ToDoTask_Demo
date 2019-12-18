@@ -1,13 +1,15 @@
-<h1><%= t('users.index_user') %></h1>
+<h1> <%= t('attributes.tasks.backend') %>： <%=t('users.index_user') %></h1>
 
 <%#= paginate @users, theme: 'twitter-bootstrap-4' %>
 
 <table class="table table-hover">
   <thead>
     <tr>
-      <td>使用者帳號</td>
-      <td>Ｅ-Mail信箱</td>
-      <td>任務數量</td>
+      <td><%= t('attributes.users.username') %></td>
+      <td><%= t('attributes.users.email') %></td>
+      <td><%= t('attributes.tasks.task_count') %></td>
+      <td><%= t('attributes.users.role') %></td>
+      <td><%= t('attributes.users.action') %></td>
     </tr>
   </thead>
   
@@ -17,12 +19,23 @@
       <td><%= user.username %></td>
       <td><%= user.email %></td>
       <td><%= user.tasks.count %></td>
-      <td><%= button_to t("users.edit"), edit_user_path(user),class:"btn btn-outline-secondary", method: 'get' %></td>
-      <td><%= button_to t("users.delete"), user_path(user), class:"btn btn-outline-danger", method: 'delete', data: { confirm: "確認刪除嗎？"} %></td>
+      <td><%= user_role(user.admin) %></td>
+      <td>
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%#= current_user.username.upcase %>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <%= link_to t("users.edit"), edit_admin_user_path(user) , class: 'dropdown-item' %>
+          <div class="dropdown-divider"></div>          
+          <%= link_to t("users.show"), admin_user_path(user) , class: 'dropdown-item' %>
+          <div class="dropdown-divider"></div>
+          <%= link_to t("users.delete"), admin_user_path(user) , class: 'dropdown-item', method: 'delete', data: { confirm: "確認刪除嗎？"}%>
+        </div>
+      </td>
     </tr>
     <% end %>
 
   </tbody>
 </table>
 
-<%= button_to t("users.create"), sign_up_path ,class:"btn btn-outline-dark", method: "get"%>
+<%= button_to t("users.create"), admin_sign_up_path ,class:"btn btn-outline-dark", method: "get"%>
