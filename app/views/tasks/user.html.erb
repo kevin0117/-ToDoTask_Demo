@@ -7,12 +7,11 @@
   <tr>
     <td><%= sort_link(ransack_obj, :id, t("tasks.task_id"), id: "title", default_order: :desc) %></td>
     <td><%= t("tasks.task_title") %></td>
-    <td><%#= t("tasks.task_content") %></td>
     <td><%= sort_link(ransack_obj, :priority, t("tasks.task_priority"), id: "priority", default_order: :desc) %></td>
     <td><%= sort_link(ransack_obj, :task_begin, t("tasks.task_begin"), id: "task_begin", default_order: :desc) %></td>
     <td><%= sort_link(ransack_obj, :task_end, t("tasks.task_end"), id: "task_end", default_order: :asc) %></td>
     <td><%= sort_link(ransack_obj, :status, t("tasks.task_status"), id: "status", default_order: :desc ) %> </td>
-    <td>操作</td>
+    <td><%= t('attributes.users.action') %></td>
     <%# <td>= t("tasks.task_status")</td> %>
      <%# <td> %>
       <%# if ransack_obj%>
@@ -30,7 +29,6 @@
     <tr>
       <td><%= task.id %></td>
       <td><%= link_to task.title, task_path(task)  %></td>
-      <td><%#= task.content %></td>
       <td><%= t("tasks.priority_#{task.priority}") %></td>
       <td><%= task.task_begin.to_s(:short) %></td>
       <td><%= task.task_end.to_s(:short) %></td>
