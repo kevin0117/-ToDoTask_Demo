@@ -14,3 +14,12 @@
  *= require_self
  */
  @import "bootstrap";
+ @import "select2";
+ @import "select2-bootstrap";
+
+ #search_bar {
+    padding-top: 15px;
+  }
+ #q_tags_name_eq {
+    margin-right: 15px;
+ }

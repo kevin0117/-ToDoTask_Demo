@@ -10,6 +10,7 @@ gem 'aasm', '~> 5.0', '>= 5.0.6'
 gem 'ransack', '~> 2.3'
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
 gem 'bootstrap4-kaminari-views', '~> 1.0', '>= 1.0.1'
+gem 'select2-rails', '~> 4.0', '>= 4.0.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
 # Use postgreSQL as the database for Active Record
