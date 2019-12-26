@@ -7,28 +7,21 @@
   <tr>
     <td><%= sort_link(ransack_obj, :id, t("tasks.task_id"), id: "title", default_order: :desc) %></td>
     <td><%= t("tasks.task_title") %></td>
+    <td><%= t("tasks.task_owner") %></td>
+    <td><%= t("attributes.tasks.tag") %></td>
     <td><%= sort_link(ransack_obj, :priority, t("tasks.task_priority"), id: "priority", default_order: :desc) %></td>
     <td><%= sort_link(ransack_obj, :task_begin, t("tasks.task_begin"), id: "task_begin", default_order: :desc) %></td>
     <td><%= sort_link(ransack_obj, :task_end, t("tasks.task_end"), id: "task_end", default_order: :asc) %></td>
     <td><%= sort_link(ransack_obj, :status, t("tasks.task_status"), id: "status", default_order: :desc ) %> </td>
     <td><%= t('attributes.users.action') %></td>
-    <%# <td>= t("tasks.task_status")</td> %>
-     <%# <td> %>
-      <%# if ransack_obj%>
-        <%#= search_form_for ransack_obj do |f| %>
-          <%#= f.input :status_eq, as: :select, collection:[[1, t('tasks.status_pending')], [2, t('tasks.status_proceeding')], [3, t('tasks.status_done')]], label_method: :second, value_method: :first, label: false %>
-          <%#= f.submit class:"btn btn-outline-dark" , style: 'display: none;', id: "btn-status"%>
-        <%# end %>
-      <%# end %>
-    <%# </td> %>
-    <td></td>
-    <td></td>
   </tr>
  
   <% @tasks.each do |task| %>
     <tr>
       <td><%= task.id %></td>
-      <td><%= link_to task.title, task_path(task)  %></td>
+      <td><%= link_to task.title, task_path(task) %></td>
+      <td><%= task.user.username %></td>
+      <td><%= display_tag(task.tag_items) %></td>
       <td><%= t("tasks.priority_#{task.priority}") %></td>
       <td><%= task.task_begin.to_s(:short) %></td>
       <td><%= task.task_end.to_s(:short) %></td>
@@ -37,9 +30,7 @@
 
       <td>
       <% if logged_in? && current_user == task.user %>
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <%#= current_user.username.upcase %>
-        </a>
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <%= link_to t("tasks.edit"), edit_task_path(task) , class: 'dropdown-item' %>
           <div class="dropdown-divider"></div>          
@@ -48,10 +39,6 @@
           <%= link_to t("tasks.delete"), task_path(task) , class: 'dropdown-item', method: 'delete', data: { confirm: "確認刪除嗎？"} %>
       <% end %>
       </td>
-
-      <td><%#= button_to t("tasks.edit"), edit_task_path(task),class:"btn btn-outline-secondary", method: 'get' %></td>
-      <td><%#= button_to t("tasks.show"), task_path(task), class:"btn btn-outline-info", method: 'get' %></td>
-      <td><%#= button_to t("tasks.delete"), task_path(task), class:"btn btn-outline-danger", method: 'delete', data: { confirm: "確認刪除嗎？"} %></td>
     </tr>
   <% end %>
 

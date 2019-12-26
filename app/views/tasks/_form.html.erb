@@ -1,16 +1,26 @@
-
-<h3> <%= error_message %> </h3>
-<%= simple_form_for(task) do |form| %>
-  <div class="wrap">
-    <%= form.input :title, label: t("tasks.task_title"), placeholder: "例如：市場買菜" %> 
-    <%= form.input :content, label: t("tasks.task_content") %>
-    <%= form.input :task_begin, label: t("tasks.task_begin")%>
-    <%= form.input :task_end, label: t("tasks.task_end") %>
-    <%= form.input :priority, as: :select, collection:[['low', t('tasks.priority_low')], ['medium', t('tasks.priority_medium')], ['urgent', t('tasks.priority_urgent')]], label_method: :second, value_method: :first, label: t("tasks.task_priority") %>
-    <%= form.input :status, as: :select, collection:[['pending', t('tasks.status_pending')], ['proceeding', t('tasks.status_proceeding')], ['done', t('tasks.status_done')]], label_method: :second, value_method: :first, label: t("tasks.task_status") %>
-
-    <%= form.submit t("tasks.submit") %>
+  <h3> <%= error_message %> </h3>
+  <%= simple_form_for(task) do |form| %>
+    <div class="wrap">
+      <%= form.input :title, label: t("tasks.task_title"), placeholder: "例如：市場買菜" %> 
+      <%= form.input :content, label: t("tasks.task_content") %>
+      <%= form.input :task_begin, label: t("tasks.task_begin")%>
+      <%= form.input :task_end, label: t("tasks.task_end") %>
+      <%= form.input :priority, as: :select, collection:[['low', t('tasks.priority_low')], ['medium', t('tasks.priority_medium')], ['urgent', t('tasks.priority_urgent')]], label_method: :second, value_method: :first, label: t("tasks.task_priority") %>
+      <%= form.input :status, as: :select, collection:[['pending', t('tasks.status_pending')], ['proceeding', t('tasks.status_proceeding')], ['done', t('tasks.status_done')]], label_method: :second, value_method: :first, label: t("tasks.task_status") %>
+      <%= form.input :tag_items, label: t("attributes.tasks.tag"), as: :select, collection: Tag.order(:name), label_method: :name, value_method: :name, input_html: {multiple: true} %>    
+      <%#= form.input :tag_list, label: '標籤' %>
+  
+      <%= form.submit t("tasks.submit") %>
+      </div>
     </div>
-  </div>
+  <% end %>
 
-<% end %>
+
+<script>
+  $(document).on('turbolinks:load', function () {
+    $("#task_tag_items").select2({
+      tags: true,
+      tokenSeparators: [',', ' ']
+    })
+  });
+</script>

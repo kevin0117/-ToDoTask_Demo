@@ -1,15 +1,6 @@
-# create_table "tasks", force: :cascade do |t|
-#   t.string "title"
-#   t.text "content"
-#   t.datetime "task_begin"
-#   t.datetime "task_end"
-#   t.integer "priority"
-#   t.string "status"
-#   t.datetime "created_at", null: false
-#   t.datetime "updated_at", null: false
-# end
-
 class Task < ApplicationRecord
+  has_many :taggings
+  has_many :tags, through: :taggings, dependent: :delete_all
   belongs_to :user
   include AASM
   paginates_per 5
@@ -47,5 +38,32 @@ class Task < ApplicationRecord
       # puts "--------------------------"
       errors.add(:task, "任務結束日期不能比開始日期早")
     end
+  end
+  # 參考來源：https://www.spreered.com/rails-tagging-using-select2/
+  # 可以用 Post.tagge_with(tagname) 來找到文章
+  def self.tagged_with(name)
+    Tag.find_by!(name: name).tasks
+  end
+
+  # 如果要取用 tag_list，可以加上這個 getter
+  def tag_list
+    tags.map(&:name).join(', ')
+  end
+
+  # tag_list 的 setter
+  def tag_list=(names)
+    self.tags = names.split(',').map do |item|
+      Tag.where(name: item.strip).first_or_create!
+    end
+  end
+
+  # tag_items 的 getter
+  def tag_items
+    tags.map(&:name)
+  end
+
+  # tag_items 的 setter
+  def tag_items=(names)
+    self.tags = names.map{ |item| Tag.where(name: item.strip).first_or_create! unless item.blank?}.compact!
   end
 end

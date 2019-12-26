@@ -6,12 +6,12 @@ class TasksController < ApplicationController
   def index
     if current_user.admin
       # 搜尋全部人的任務
-      @q = Task.includes(:user).ransack(params[:q])
+      @q = Task.includes(:user, :tags).ransack(params[:q])
     else
       # 搜尋 該使用者的任務
-      @q = current_user.tasks.includes(:user).ransack(params[:q])
+      @q = current_user.tasks.includes(:tags).ransack(params[:q])
     end
-    @tasks = @q.result(distinct: true).page params[:page]
+    @tasks = @q.result(distinct: true).page(params[:page])
   end
 
   def show
@@ -58,8 +58,9 @@ class TasksController < ApplicationController
   end
   
   def destroy
-    @task.destroy
-    redirect_to user_tasks_path(current_user), notice: "刪除成功"
+    if @task.destroy
+      redirect_to user_tasks_path(current_user), notice: "刪除成功"
+    end
   end
 
   def user
@@ -69,7 +70,7 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:title, :content, :task_begin, :task_end, :priority, :status, :user)
+    params.require(:task).permit(:title, :content, :task_begin, :task_end, :priority, :status, :user,:tag_list, :tag, {tag_items:[]})
   end
   
   def find_task
