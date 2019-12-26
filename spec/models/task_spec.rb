@@ -8,7 +8,7 @@
 #   t.datetime "created_at", null: false
 #   t.datetime "updated_at", null: false
 # end
-
+ 
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
@@ -21,6 +21,7 @@ RSpec.describe Task, type: :model do
     it { should validate_presence_of(:task_end) }
     it { should validate_presence_of(:priority) }
     it { should validate_presence_of(:status) }
+    it { should validate_presence_of(:user_id) }
 
     it "任務建立失敗當開始時間設定空白" do
       task = Task.new(title: "Shopping", 
@@ -28,7 +29,8 @@ RSpec.describe Task, type: :model do
                       task_begin: "",
                       task_end: "Wed, 21 Nov 2019 19:06:00 CST +08:00",
                       priority: "urgent",
-                      status: "pending")
+                      status: "pending"
+                      user_id: 1 )
         expect {
           expect(task).to be_valid
         }.to raise_exception(/Task begin 不能為空白/)

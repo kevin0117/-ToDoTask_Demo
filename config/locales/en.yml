@@ -91,6 +91,7 @@ en:
     tasks:
       task_count: "Task count"
       backend: "Back-End"
+      tag: "Tag"
 
   # admin: "Admin"
   # member: "Member"

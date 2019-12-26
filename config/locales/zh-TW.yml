@@ -61,5 +61,6 @@ zh-TW:
     tasks:
       task_count: "任務數量"
       backend: "後台 "
+      tag: "標籤"
 
 

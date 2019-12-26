@@ -5,7 +5,6 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-
   end
 
   def new
@@ -31,7 +30,6 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       redirect_to user_tasks_path(current_user), notice: "更新帳戶成功"
-      # redirect_to tasks_path, notice: "更新帳戶成功"
     else
       @error_message = @user.errors.full_messages.to_sentence
       render :edit
@@ -52,5 +50,4 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:username, :email, :password)
   end
-
 end

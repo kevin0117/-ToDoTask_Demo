@@ -19,17 +19,18 @@
       <% end %>
     </ul>
 
-    <%= form_tag(tasks_path, :method => "get", :class => 'd-flex') do %>
+    <%= form_tag(tasks_path, :method => "get", :class => 'd-flex', :id => 'search_bar') do %>
       <form class="form-inline my-2 my-lg-10">
         <% if ransack_obj %>
           <%= search_form_for ransack_obj do |f| %>
-            <%= f.search_field :title_or_content_cont, class:"form-control mr-sm-2", type:"search", placeholder:"搜尋標題或內容"%>
-            <%= f.submit class:"btn btn-outline-light my-2 my-sm-0" %>
+            <div><%= f.input :tags_name_eq, ad: :select, label: false, collection: Tag.all, label_method: :name, value_method: :name, :required => false %></div>
+            <div><%= f.search_field :title_or_content_cont, class:"form-control mr-sm-2", type:"search", placeholder:"搜尋標題或內容"%></div>
+            <div><%= f.submit class:"btn btn-outline-light my-2 my-sm-0" %></div>
           <% end %>
         <% end %>
       </form>
     <% end %>
-         
+  
     <ul class="navbar-nav">
         <% if logged_in? %>
         <li class="nav-item dropdown">
@@ -68,14 +69,4 @@
     </ul>
   </div>
 </nav>
-
-
-
-    <%# <form class="form-inline my-2 my-lg-10"> %>
-      <%# <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> %>
-      <%# <button class="btn btn-outline-light my-2 my-sm-0" type="submit"> %>
-        <%#= t('.search') %>
-      <%# </button> %>
-    <%# </form> %>
-
 
