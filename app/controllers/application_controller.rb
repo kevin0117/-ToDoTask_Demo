@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     I18n.available_locales.map(&:to_s).include?(parsed_locale) ? parsed_locale : nil
   end
 
-  helper_method :current_user, :logged_in?, :ransack_obj, :ransack_tasks, :user_role
+  helper_method :current_user, :logged_in?, :ransack_obj, :user_role
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -56,12 +56,5 @@ class ApplicationController < ActionController::Base
   def ransack_obj
     @q = Task.ransack(params[:q])
   end
-
-  def ransack_tasks
-    @q = Task.ransack(params[:q])
-    @tasks = @q.result(distinct: true).page params[:page]
-  end
   
 end
-
-
